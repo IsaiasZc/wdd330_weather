@@ -1,0 +1,64 @@
+
+:root {
+  --main-blue: #24609b;
+}
+
+body {
+  font-family: 'Red Hat Display', sans-serif;
+}
+
+.c-mainBlue {
+  color: var(--main-blue);
+}
+
+.currentCard {
+  flex-flow: column nowrap;
+}
+
+.currentCard-temp {
+  font-size: calc(5rem + 1.5vw);
+}
+
+.card_tmp_detailed {
+  background-color: rgba(255,255,255,.4);
+}
+/* 
+.b-500 {
+  font-weight: 500;
+}
+
+.b-600 {
+  font-weight: 600;
+}
+
+.b-700 {
+  font-weight: 700;
+} */
+
+.hide {
+  display: none !important;
+}
+
+.main-test {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.currentCard {
+  background: #d5ebff;
+  border-radius: .5rem;
+}
+
+
+@media screen and (min-width: 62rem) {
+
+}
+
+
+/* X-Large View */
+@media screen and (min-width: 75rem) {
+  .currentCard {
+    flex-direction: row;
+  }
+}
