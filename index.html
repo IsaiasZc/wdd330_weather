@@ -100,81 +100,55 @@
         </div>
       </header>
 
-      <div class="h-100" id="main-cnt">
+      <div class="h-100 d-flex justify-content-center align-items-center" id="main-cnt">
 
-            <!-- TEST CARD -->
-        <!-- <div>
-          <section class="card_main">
-            <div class="card_main_head">
-              <p>
-                <i class="bi bi-geo-alt"></i>
-                <span id="card-place">${wth.name}</span>
-              </p>
-              <p>Today <span id="card-time"></span></p>
-            </div>
-            <div class="card_main_tmp">
-              <span>
-                ${wth.main.temp}
-              </span>
-              <span>
-                ${wth.weather[0].description}
-              </span>
-            </div>
-            <div class="card_main_more">
-              <article>
-                <i class="bi bi-wind"></i>
-                <span>${wth.main.pressure}</span>
-              </article>
-              <article>
-                <i class="bi bi-droplet"></i>
-                <span>${wth.main.humidity}%</span>
-              </article>
-              <article>
-                <i class="bi bi-cloud-haze2-fill"></i>
-                <span>${wth.wind.speed}km/h</span>
-              </article>
-            </div>
-          </section>
-
-          <section class="card_tmp_detailed">
-            proximamente
-          </section>
+        <!-- <div class="spinner-border" style="width: 6rem; height: 6rem;" role="status">
+          <span class="visually-hidden">Loading...</span>
         </div> -->
-
-            <!-- TEST CARD -->
-
-
 
       </div>
   
       <!-- BOTTOM BAR FOR SMALL SCREENS -->
-      <div class="bottombar px-3 py-2 text-bg-dark">
+      <div class="bottombar px-3 py-2 text-bg-dark position-fixed bottom-0 start-0 end-0">
         <div class="container">
           <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
   
-            <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
+            <ul class="nav col-12 col-lg-auto my-2 justify-content-evenly my-md-0 text-small">
               <li>
                 <a href="#" class="nav-link text-secondary">
                   <i class="bi bi-house"></i>
-                  Home
                 </a>
               </li>
               <li>
                 <a href="#" class="nav-link text-white">
                   <i class="bi bi-calendar3-range"></i>
-                  Forecast
                 </a>
               </li>
               <li>
                 <a href="#" class="nav-link text-white">
                   <i class="bi bi-building-gear"></i>
-                  Principal Cities
                 </a>
               </li>
               <li>
                 <a href="#" class="nav-link text-white">
                   <i class="bi bi-cloud-sun"></i>
-                  My Location
+                </a>
+              </li>
+
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- BOTTOM FILLED -->
+      <div class="bottombar px-3 py-2 text-bg-dark">
+        <div class="container">
+          <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+  
+            <ul class="nav col-12 col-lg-auto my-2 justify-content-evenly my-md-0 text-small">
+              <li>
+                <a href="#" class="nav-link text-secondary">
+                  <i class="bi bi-house"></i>
                 </a>
               </li>
 

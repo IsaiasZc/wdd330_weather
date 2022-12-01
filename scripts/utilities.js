@@ -66,14 +66,15 @@ export default class Utilities {
    * @param {data} data prepare the home view
    * @returns the home view
    */
-  prepareHome(data) {
+  prepareHome(data, details=[]) {
 
     const mainCard = this.createCurrentCard(data);
-
+    const detailsC = this.createMdetailCards(details);
     const homeView = cn("section");
     homeView.className = "home-view container-sm";
 
     homeView.appendChild(mainCard);
+    homeView.appendChild(detailsC);
 
     return homeView;
   }
@@ -89,9 +90,57 @@ export default class Utilities {
   }
 
 
-  showHome(data) {
-    const view = this.prepareHome(data);
+  /**
+   * 
+   * @param {object} data information for the main card
+   */
+  showHome(data, details=[]) {
+    const view = this.prepareHome(data, details);
     this.showMainView(view)
+  }
+
+
+  createMdetailCards(arr) {
+    const details = cn("div");
+    details.className = "details";
+
+    arr.forEach( data => details.appendChild(this._createMDetailCard(data)))
+    
+    return details
+  }
+
+
+  _createMDetailCard(obj) {
+    const card = cn("div");
+    const {title, descrip, value, imgPath} = obj;
+
+    card.innerHTML = `
+    <div class="data">
+      <h2>${title}</h2>
+      <span>${descrip}</span>
+      <span>${value}</span>
+    </div>
+    <div class="image">
+    <img src="${imgPath}" alt="${title}">
+    </div>
+    `
+
+    return card
+  }
+
+  _classesLoading() {
+    this.parent.classList.toggle("d-flex");
+    this.parent.classList.toggle("justify-content-center");
+    this.parent.classList.toggle("align-items-center");
+  }
+
+  setLoadingView() {
+    // this._classesLoading();
+    this.parent.innerHTML = `
+    <div class="spinner-border" style="width: 6rem; height: 6rem;" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+    `
   }
 }
 

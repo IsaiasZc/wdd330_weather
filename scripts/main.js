@@ -12,12 +12,14 @@ export default class Main {
   async setup() {
     effects.setup();
 
-    const coords = await this.getCurrentPosition();
-    const data = await api.reqByCords(coords);
+    utl.setLoadingView();
 
+    const coords = await this.getCurrentPosition();
+    const {data, details} = await api.reqByCords(coords);
+    
     console.log(data);
 
-    utl.showHome(data);
+    utl.showHome(data, details);
 
   };
 
@@ -26,5 +28,7 @@ export default class Main {
     
     return coords
   }
+
+  
 
 };

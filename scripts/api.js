@@ -10,7 +10,21 @@ export default class Api {
 
     const response = await getJson(URL);
 
-    return response
+    const detailJson = await getJson(buildURL(`lat=${latitude}&lon=${longitude}`, '3.0/onecall'));
+
+    const detailData = {
+      speed: response.wind.speed,
+      pressure: response.main.pressure,
+      uv : detailJson.current.uvi,
+      humidity : response.main.humidity,
+    };
+
+    const details = buildDetails(detailData);
+
+    return {
+      data: response,
+      details,
+    }
   }
 
 }
@@ -20,12 +34,40 @@ export default class Api {
  * @param {string} params for the request
  * @returns URL string
  */
-function buildURL(params) {
+function buildURL(params, apiPath="") {
 
-  const URL = `https://api.openweathermap.org/data/2.5/weather?${params}&appid=${key}&units=metric`
+  const URL = `https://api.openweathermap.org/data/${apiPath || "2.5/weather"}?${params}&appid=${key}&units=metric`
 
   return URL
 
+}
+
+/**
+ * Create the objects whith the starter information about details, this information will be used in the detail cards.
+ * @param {object} data object with details information
+ */
+function buildDetails(data) {
+
+  const wind = buildDetail("Wind", "Today wind speed", data.speed);
+  const pressure = buildDetail("Pressure", "Today Pressure", data.pressure);
+  const uv = buildDetail("UV Index", "Today UV Index", data.uv);
+  const humidity = buildDetail("Humidity", "Today Humidity", data.humidity);
+  
+  return [
+    wind,
+    pressure,
+    uv,
+    humidity
+  ]
+}
+
+function buildDetail(title, descrip, value, imgPath="") {
+  return {
+    title,
+    descrip,
+    value,
+    imgPath
+  }
 }
 
 /**
@@ -39,7 +81,6 @@ async function getJson(url) {
     if(!response.ok) {
       throw new Error(response.statusText);
     }
-
     return response.json();
   })
   .catch(err => console.log(err));
