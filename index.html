@@ -16,6 +16,8 @@
 
   <!-- BS5 icons -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
+
+  <!-- My Scripts -->
   <script src="./scripts/index.js" defer type="module"></script>
   
 
@@ -41,25 +43,25 @@
       <hr>
       <ul class="nav nav-pills flex-column mb-auto">
         <li class="nav-item">
-          <a href="#" class="nav-link active" aria-current="page">
+          <a href="#" class="btn-nav nav-link active home-btn" aria-current="page" data-key="home-btn">
             <i class="bi bi-house"></i>
             Home
           </a>
         </li>
         <li>
-          <a href="#" class="nav-link link-dark">
+          <a href="#" class="btn-nav nav-link link-dark forecast-btn" data-key="forecast-btn">
             <i class="bi bi-calendar3-range"></i>
             Forecast
           </a>
         </li>
         <li>
-          <a href="#" class="nav-link link-dark">
+          <a href="#" class="btn-nav nav-link link-dark cities-btn" data-key="cities-btn">
             <i class="bi bi-building-gear"></i>
             Principal Cities
           </a>
         </li>
         <li>
-          <a href="#" class="nav-link link-dark">
+          <a href="#" class="btn-nav nav-link link-dark location-btn" data-key="location-btn">
             <i class="bi bi-cloud-sun"></i>
             My Location
           </a>
@@ -109,28 +111,28 @@
       </div>
   
       <!-- BOTTOM BAR FOR SMALL SCREENS -->
-      <div class="bottombar px-3 py-2 text-bg-dark position-fixed bottom-0 start-0 end-0">
+      <div class="bottombar px-3 py-2 text-bg-light position-fixed bottom-0 start-0 end-0">
         <div class="container">
           <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
   
             <ul class="nav col-12 col-lg-auto my-2 justify-content-evenly my-md-0 text-small">
               <li>
-                <a href="#" class="nav-link text-secondary">
+                <a href="#" class="btn-nav nav-link text-primary home-btn" data-key="home-btn">
                   <i class="bi bi-house"></i>
                 </a>
               </li>
               <li>
-                <a href="#" class="nav-link text-white">
+                <a href="#" class="btn-nav nav-link text-dark forecast-btn" data-key="forecast-btn">
                   <i class="bi bi-calendar3-range"></i>
                 </a>
               </li>
               <li>
-                <a href="#" class="nav-link text-white">
+                <a href="#" class="btn-nav nav-link text-dark cities-btn" data-key="cities-btn">
                   <i class="bi bi-building-gear"></i>
                 </a>
               </li>
               <li>
-                <a href="#" class="nav-link text-white">
+                <a href="#" class="btn-nav nav-link text-dark location-btn" data-key="location-btn">
                   <i class="bi bi-cloud-sun"></i>
                 </a>
               </li>
@@ -140,7 +142,7 @@
         </div>
       </div>
 
-      <!-- BOTTOM FILLED -->
+      <!-- BOTTOM FILLED HIDE-->
       <div class="bottombar px-3 py-2 text-bg-dark">
         <div class="container">
           <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">

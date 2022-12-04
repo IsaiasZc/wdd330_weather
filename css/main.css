@@ -7,6 +7,14 @@ body {
   font-family: 'Red Hat Display', sans-serif;
 }
 
+/* COLOR CLASSES */
+
+.text-indigo {
+  color: var(--bs-indigo);
+}
+
+/* END OF COLOR CLASSES */
+
 .c-mainBlue {
   color: var(--main-blue);
 }

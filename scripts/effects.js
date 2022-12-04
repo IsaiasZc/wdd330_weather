@@ -1,17 +1,70 @@
 export default class Effects {
-  constructor() {
-    
+  constructor(home, forecast, cities, location) {
+    this.btns = {
+      before: 'home-btn',
+      btns: {
+        [home]: $(`.${home}`),
+        [forecast]: $(`.${forecast}`),
+        [cities]: $(`.${cities}`),
+        [location]: $(`.${location}`)
+      }
+    }
   }
 
   setup() {
 
     changeNavBars(".bottombar",".sidebar");
-    this.changeBarsOnResize(".bottombar",".sidebar")
+    this.changeBarsOnResize(".bottombar",".sidebar");
+    this.setBtnEvents();
   }
 
   changeBarsOnResize(small, large) {
     window.addEventListener("resize", () => changeNavBars(small,large))
   }
+
+  setBtnEvents() {
+    this.getAllBtns().forEach( (btn) => {
+      btn.addEventListener("click", () => {
+        const button = btn.closest(".btn-nav");
+        
+        const key = button.dataset.key;
+        this.changeActiveBtn(key);
+      })
+    })
+  }
+
+  replaceClass(element, oldClass,newClass) {
+    element.classList.remove(oldClass);
+    element.classList.add(newClass)
+  }
+
+  changeActiveBtn(key) {
+    // old btns
+    this.replaceClass(this.getBtn(this.btns.before),'active','link-dark');
+    this.replaceClass(this.getBtn(this.btns.before,1),'text-primary','text-dark');
+    
+    // new Btns
+    this.replaceClass(this.getBtn(key),'link-dark','active');
+    this.replaceClass(this.getBtn(key,1),'text-dark','text-primary');
+
+    //Change the before property
+    this.btns.before = key;
+
+  }
+
+  getBtn(key, position = 0){ 
+    return this.btns.btns[key][position]
+  }
+
+  getAllBtns() {
+    const btnsArr = [];
+    for(let btns in this.btns.btns) {
+      btnsArr.push(...this.btns.btns[btns])
+    }
+
+    return btnsArr
+  }
+
 };
 
 const changeNavBars = (small, large) => {
@@ -42,16 +95,16 @@ const pxToRem = (px) => {
 }
 
 
-const showElem = (elem) => {
-  elem.classList.remove("hide")
+const showElem = (elems) => {
+  elems.forEach( elem => elem.classList.remove("hide"))
 }
 
 
-const hideElem = (elem) => {
+const hideElem = (elems) => {
 
-  elem.classList.add("hide");
+  elems.forEach( elem => elem.classList.add("hide"));
 }
 
 const $ = (selector) => {
-  return document.querySelector(selector);
+  return [...document.querySelectorAll(selector)];
 }
