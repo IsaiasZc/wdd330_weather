@@ -15,16 +15,15 @@ export default class Main {
     utl.setLoadingView();
 
     const coords = await this.getCurrentPosition();
-    const {data, details} = await api.reqByCords(coords);
+    const {data, details, forecast} = await api.reqByCords(coords);
     
-    console.log(data);
-
     utl.showHome(data, details);
 
     this.setupEventViews(
       {
         data,
-        details
+        details,
+        forecast
       }
     );
   };
@@ -35,9 +34,9 @@ export default class Main {
     return coords;
   };
 
-  setupEventViews(home) {
-    this.setEventView('.home-btn', () => utl.showHome(home.data, home.details))
-    this.setEventView('.forecast-btn', () => utl.showForecast())
+  setupEventViews(weather) {
+    this.setEventView('.home-btn', () => utl.showHome(weather.data, weather.details))
+    this.setEventView('.forecast-btn', () => utl.showForecast(weather.forecast))
     this.setEventView('.cities-btn', () => utl.showCities())
     this.setEventView('.location-btn', () => utl.showLocation())
   }

@@ -30,6 +30,13 @@ body {
 .card_tmp_detailed {
   background-color: rgba(255,255,255,.4);
 }
+
+.fore-days-cnt {
+  display: grid;
+  grid-template-columns: repeat(auto-fill,minmax(300px, 40%));
+  justify-content: space-between;
+  /* color: red; */
+}
 /* 
 .b-500 {
   font-weight: 500;

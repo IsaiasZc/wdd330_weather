@@ -12,7 +12,7 @@ export default class Utilities {
    * 
    * @param {selector} parent selector for the view
    */
-  constructor(parent, btns) {
+  constructor(parent) {
     this.parent = this.$(parent)[0];
     this.home = new HomeView("home");
     this.forecast = new ForeCastView("forecast");
@@ -31,8 +31,8 @@ export default class Utilities {
     this.showMainView(view)
   }
 
-  showForecast() {
-    const view = ""
+  showForecast(forecast) {
+    const view = this.forecast.prepareForecast(forecast)
     this.showMainView(view)
   }
 
@@ -64,7 +64,7 @@ export default class Utilities {
   setLoadingView() {
     // this._classesLoading();
     this.parent.innerHTML = `
-    <div class="spinner-border" style="width: 6rem; height: 6rem;" role="status">
+    <div class="spinner-grow text-info" style="width: 6rem; height: 6rem;" role="status">
       <span class="visually-hidden">Loading...</span>
     </div>
     `

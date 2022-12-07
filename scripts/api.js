@@ -12,6 +12,8 @@ export default class Api {
 
     const detailJson = await getJson(buildURL(`lat=${latitude}&lon=${longitude}`, '3.0/onecall'));
 
+    const forecast = this.getForecast(detailJson);
+
     const detailData = {
       speed: response.wind.speed,
       pressure: response.main.pressure,
@@ -24,6 +26,22 @@ export default class Api {
     return {
       data: response,
       details,
+      forecast
+    }
+  }
+
+  getForecast(data) {
+
+    // console.log(data);
+
+    // data.hourly.forEach( day => {
+    //   console.log(new Date(day.dt * 1000))
+    // })
+
+    const {daily, hourly} = data;
+    return {
+      daily,
+      hourly
     }
   }
 

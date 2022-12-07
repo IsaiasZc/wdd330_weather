@@ -7,6 +7,8 @@ export default class View {
 
   timeFormat(time) {
     let newTime = time ? new Date(time) : new Date();
+    
+    console.log(newTime);
 
     return newTime.toLocaleString("en-US", {
       hour: "numeric",
@@ -35,5 +37,9 @@ export default class View {
    */
   $(select) {
     return document.querySelector(select) || console.error("El elemento indicado no existe en el DOM");
+  }
+
+  getIconURL(icon) {
+    return `http://openweathermap.org/img/wn/${icon}@2x.png`
   }
 }
