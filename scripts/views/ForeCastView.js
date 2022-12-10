@@ -45,7 +45,7 @@ export default class ForeCastView extends View {
   dailyCards(days) {
     const container = this.newElem('section');
     container.className = 'fore-days-cnt d-grid'
-    console.log(days)
+    // console.log(days)
     days.forEach( day => {
       container.appendChild(this.dayCard(day))
     })

@@ -1,14 +1,14 @@
 
 
 export default class View {
-  cosntructor(name) {
+  constructor(name) {
     this.name = name;
   }
 
   timeFormat(time) {
     let newTime = time ? new Date(time) : new Date();
     
-    console.log(newTime);
+    // console.log(newTime);
 
     return newTime.toLocaleString("en-US", {
       hour: "numeric",

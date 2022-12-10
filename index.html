@@ -43,28 +43,28 @@
       <hr>
       <ul class="nav nav-pills flex-column mb-auto">
         <li class="nav-item">
-          <a href="#" class="btn-nav nav-link active home-btn" aria-current="page" data-key="home-btn">
+          <button href="#" class="w-100 btn-nav nav-link active home-btn" aria-current="page" data-key="home-btn" disabled>
             <i class="bi bi-house"></i>
             Home
-          </a>
+          </button>
         </li>
         <li>
-          <a href="#" class="btn-nav nav-link link-dark forecast-btn" data-key="forecast-btn">
+          <button href="#" class="w-100 btn-nav nav-link link-dark forecast-btn" data-key="forecast-btn" disabled>
             <i class="bi bi-calendar3-range"></i>
             Forecast
-          </a>
+          </button>
         </li>
         <li>
-          <a href="#" class="btn-nav nav-link link-dark cities-btn" data-key="cities-btn">
+          <button href="#" class="w-100 btn-nav nav-link link-dark cities-btn" data-key="cities-btn" disabled>
             <i class="bi bi-building-gear"></i>
             Principal Cities
-          </a>
+          </button>
         </li>
         <li>
-          <a href="#" class="btn-nav nav-link link-dark location-btn" data-key="location-btn">
+          <button href="#" class="w-100 btn-nav nav-link link-dark location-btn" data-key="location-btn" disabled>
             <i class="bi bi-cloud-sun"></i>
             My Location
-          </a>
+          </button>
         </li>
         <!-- <li>
           <a href="#" class="nav-link link-dark">
@@ -77,7 +77,7 @@
       </ul>
     </div>
   
-    <main class="main-test col-lg container-fluid p-0">
+    <main class="main-cnt col-lg container-fluid p-0">
       <header class="py-3 mb-3 border-bottom">
         <div class="d-flex align-items-center justify-content-between px-5">
           <form class="w-50 me-3" role="search">
@@ -90,19 +90,29 @@
               <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
             </a>
             <ul class="dropdown-menu text-small shadow">
-              <li><a class="dropdown-item" href="#">New project...</a></li>
-              <li><a class="dropdown-item" href="#">Settings</a></li>
-              <li><a class="dropdown-item" href="#">Profile</a></li>
-              <li>
-                <hr class="dropdown-divider">
-              </li>
-              <li><a class="dropdown-item" href="#">Sign out</a></li>
+              <li><button class="dropdown-item" id="signout" href="#" disabled>Sign out</button></li>
             </ul>
           </div>
         </div>
       </header>
 
-      <div class="h-100 d-flex justify-content-center align-items-center" id="main-cnt">
+      <div id="login" class="mx-2 h-100 d-flex align-items-center justify-content-center">
+        <form name="login-form" id="login-form">
+          <div class="mb-3">
+            <label for="email" class="form-label">Email address</label>
+            <input type="email" name="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="demo@demo.com" required>
+            <div id="emailHelp" class="form-text">If you don't have a user, use the ones seen in the example</div>
+          </div>
+          <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" name="password" class="form-control" id="password" placeholder="demobyu" required>
+          </div>
+
+          <button type="submit" class="btn btn-primary">Login</button>
+        </form>
+      </div>
+
+      <div class="h-100 d-flex justify-content-center align-items-center hide" id="root">
 
         <!-- <div class="spinner-border" style="width: 6rem; height: 6rem;" role="status">
           <span class="visually-hidden">Loading...</span>
@@ -117,24 +127,24 @@
   
             <ul class="nav col-12 col-lg-auto my-2 justify-content-evenly my-md-0 text-small">
               <li>
-                <a href="#" class="btn-nav nav-link text-primary home-btn" data-key="home-btn">
+                <button href="#" class="btn btn-nav nav-link text-primary home-btn" data-key="home-btn" disabled>
                   <i class="bi bi-house"></i>
-                </a>
+                </button>
               </li>
               <li>
-                <a href="#" class="btn-nav nav-link text-dark forecast-btn" data-key="forecast-btn">
+                <button href="#" class="btn btn-nav nav-link text-dark forecast-btn" data-key="forecast-btn" disabled>
                   <i class="bi bi-calendar3-range"></i>
-                </a>
+                </button>
               </li>
               <li>
-                <a href="#" class="btn-nav nav-link text-dark cities-btn" data-key="cities-btn">
+                <button href="#" class="btn btn-nav nav-link text-dark cities-btn" data-key="cities-btn" disabled>
                   <i class="bi bi-building-gear"></i>
-                </a>
+                </button>
               </li>
               <li>
-                <a href="#" class="btn-nav nav-link text-dark location-btn" data-key="location-btn">
+                <button href="#" class="btn btn-nav nav-link text-dark location-btn" data-key="location-btn" disabled>
                   <i class="bi bi-cloud-sun"></i>
-                </a>
+                </button>
               </li>
 
             </ul>

@@ -12,7 +12,10 @@ export default class Utilities {
    * 
    * @param {selector} parent selector for the view
    */
-  constructor(parent) {
+  constructor(parent, form, signout, btnsNav) {
+    this.btnsNav = this.$(btnsNav);
+    this.signout = this.$(signout)[0];
+    this.form = this.$(form)[0];
     this.parent = this.$(parent)[0];
     this.home = new HomeView("home");
     this.forecast = new ForeCastView("forecast");
@@ -21,13 +24,38 @@ export default class Utilities {
 
   };
 
-  showLocation() {
-    const view = ""
+  cleanFormat() {
+    this.form.reset();
+  }
+
+  changeActiveBtnState() {
+    this.btnsNav.forEach(btn =>  {
+      btn.disabled = !btn.disabled;
+    })
+  }
+
+  changeLogView() {
+    console.log(this.form);
+    this.form.parentNode.classList.toggle('hide');
+    this.parent.classList.toggle('hide');
+    this.signout.disabled = !this.signout.disabled;
+  }
+
+  getFormValues() {
+    const userName = this.form.email.value;
+    const password = this.form.password.value;
+
+    return {userName, password}
+  }
+
+  showLocation(wth, country) {
+    const view = this.location.prepareCountry(wth, country);
     this.showMainView(view)
   }
 
-  showCities() {
-    const view = ""
+  showCities(cities) {
+    const view = this.cities.prepareCities(cities);
+
     this.showMainView(view)
   }
 

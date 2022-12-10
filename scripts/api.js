@@ -6,28 +6,83 @@ export default class Api {
 
     const {latitude, longitude} = coords;
 
-    const URL = buildURL(`lat=${latitude}&lon=${longitude}`)//`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${this.key}`;
+    const URL = buildURL(`lat=${latitude}&lon=${longitude}`);
 
-    const response = await getJson(URL);
+    const current = await getJson(URL);
+
+    // console.log(current);
 
     const detailJson = await getJson(buildURL(`lat=${latitude}&lon=${longitude}`, '3.0/onecall'));
 
     const forecast = this.getForecast(detailJson);
 
     const detailData = {
-      speed: response.wind.speed,
-      pressure: response.main.pressure,
+      speed: current.wind.speed,
+      pressure: current.main.pressure,
       uv : detailJson.current.uvi,
-      humidity : response.main.humidity,
+      humidity : current.main.humidity,
     };
 
     const details = buildDetails(detailData);
 
     return {
-      data: response,
+      data: current,
       details,
       forecast
     }
+  }
+
+  async reqCities() {
+    const cities = [
+      {
+        city: 'Sao paulo',
+        country: 'BR'
+      },
+      {
+        city: 'New York',
+        country: 'US'
+      },
+      {
+        city: 'London',
+        country: 'GB'
+      },
+      {
+        city: 'Tokyo',
+        country: 'JP'
+      },
+      {
+        city: 'Lima',
+        country: 'PE'
+      }
+    ]
+
+    const weathers = [];
+    
+
+    for (const city of cities) {
+      const URL = buildURL(`q=${city.city},${city.country}`);
+      // console.log(URL)
+      const json = await getJson(URL);
+      // console.log(json);
+      weathers.push({
+        name: json.name,
+        dt: json.dt,
+        temp: json.main.temp,
+        weather: json.weather[0]
+      })
+    }
+
+    // console.log(weathers)
+
+    return weathers
+  }
+
+  async reqCountryInfo(code) { 
+    const URL = buildCountryURL(code);
+
+    const json = await getJson(URL);
+
+    return json[0]
   }
 
   getForecast(data) {
@@ -61,6 +116,15 @@ function buildURL(params, apiPath="") {
 }
 
 /**
+ * build the URL for the country API request
+ * @param {string} code of the Country
+ * @returns API URL
+ */
+function buildCountryURL(code) {
+  return `https://restcountries.com/v3.1/alpha?codes=${code}`
+}
+
+/**
  * Create the objects whith the starter information about details, this information will be used in the detail cards.
  * @param {object} data object with details information
  */
@@ -89,9 +153,9 @@ function buildDetail(title, descrip, value, imgPath="") {
 }
 
 /**
- * make a api request
+ * make a request to the weather API
  * @param {string} url api for the request
- * @returns json object with a response
+ * @returns a JSON response
  */
 async function getJson(url) {
   return fetch(url)
