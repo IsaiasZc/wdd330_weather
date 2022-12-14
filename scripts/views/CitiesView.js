@@ -29,7 +29,7 @@ export default class CitiesView extends View {
     </div>
     <div class="city-icon d-flex flex-column align-items-center">
       <img src="${this.getIconURL(city.weather.icon)}">
-      <button class="btn btn-primary">More Details <i class="bi bi-arrow-right-short"></i></button>
+      <button class="btn btn-primary btn-city">More Details <i class="bi bi-arrow-right-short"></i></button>
     </div>
     `
 

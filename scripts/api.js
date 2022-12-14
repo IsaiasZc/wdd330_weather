@@ -1,39 +1,8 @@
 const key = "31b886c84c9c9db98eeba6960d675bee";
 
 export default class Api {
-
-  async reqByCords(coords) {
-
-    const {latitude, longitude} = coords;
-
-    const URL = buildURL(`lat=${latitude}&lon=${longitude}`);
-
-    const current = await getJson(URL);
-
-    // console.log(current);
-
-    const detailJson = await getJson(buildURL(`lat=${latitude}&lon=${longitude}`, '3.0/onecall'));
-
-    const forecast = this.getForecast(detailJson);
-
-    const detailData = {
-      speed: current.wind.speed,
-      pressure: current.main.pressure,
-      uv : detailJson.current.uvi,
-      humidity : current.main.humidity,
-    };
-
-    const details = buildDetails(detailData);
-
-    return {
-      data: current,
-      details,
-      forecast
-    }
-  }
-
-  async reqCities() {
-    const cities = [
+  constructor() {
+    this.cities =  [
       {
         city: 'Sao paulo',
         country: 'BR'
@@ -55,11 +24,50 @@ export default class Api {
         country: 'PE'
       }
     ]
+  }
+
+  async reqByCords(params,type="cords") {
+
+    // const {latitude, longitude} = coords;
+    const extend = type === "cords" ? `lat=${params.latitude}&lon=${params.longitude}` : `q=${params}`;
+
+    const URL = buildURL(extend);
+
+    const current = await getJson(URL);
+
+    //Special URL for the detail JSON
+    const detailURL = type !== "cords" ? `lat=${current.coord.lat}&lon=${current.coord.lon}` : extend;
+
+    const detailJson = await getJson(buildURL(detailURL, '3.0/onecall'));
+
+    const forecast = this.getForecast(detailJson);
+
+    const detailData = {
+      speed: current.wind.speed,
+      pressure: current.main.pressure,
+      uv : detailJson.current.uvi,
+      humidity : current.main.humidity,
+    };
+
+    const details = buildDetails(detailData);
+
+    return {
+      data: current,
+      details,
+      forecast
+    }
+  }
+
+  getCities() {
+    return this.cities;
+  }
+
+  async reqCities() {
 
     const weathers = [];
     
 
-    for (const city of cities) {
+    for (const city of this.cities) {
       const URL = buildURL(`q=${city.city},${city.country}`);
       // console.log(URL)
       const json = await getJson(URL);
@@ -86,12 +94,6 @@ export default class Api {
   }
 
   getForecast(data) {
-
-    // console.log(data);
-
-    // data.hourly.forEach( day => {
-    //   console.log(new Date(day.dt * 1000))
-    // })
 
     const {daily, hourly} = data;
     return {

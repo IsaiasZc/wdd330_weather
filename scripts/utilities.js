@@ -12,7 +12,8 @@ export default class Utilities {
    * 
    * @param {selector} parent selector for the view
    */
-  constructor(parent, form, signout, btnsNav) {
+  constructor(parent, form, signout, btnsNav, search) {
+    this.search = this.$(search)[0];
     this.btnsNav = this.$(btnsNav);
     this.signout = this.$(signout)[0];
     this.form = this.$(form)[0];
@@ -24,8 +25,8 @@ export default class Utilities {
 
   };
 
-  cleanFormat() {
-    this.form.reset();
+  cleanFormat(form) {
+    form.reset();
   }
 
   changeActiveBtnState() {
@@ -35,7 +36,6 @@ export default class Utilities {
   }
 
   changeLogView() {
-    console.log(this.form);
     this.form.parentNode.classList.toggle('hide');
     this.parent.classList.toggle('hide');
     this.signout.disabled = !this.signout.disabled;
@@ -53,10 +53,11 @@ export default class Utilities {
     this.showMainView(view)
   }
 
-  showCities(cities) {
+  showCities(cities, callBack) {
     const view = this.cities.prepareCities(cities);
 
-    this.showMainView(view)
+    this.showMainView(view);
+    callBack();
   }
 
   showForecast(forecast) {
@@ -98,6 +99,11 @@ export default class Utilities {
     `
   };
 
+  /**
+   * get all the nodes with the given selector
+   * @param {selector} select 
+   * @returns array of nodes
+   */
   $(select) {
     return [...document.querySelectorAll(select)] || console.error("El elemento indicado no existe en el DOM");
   };
