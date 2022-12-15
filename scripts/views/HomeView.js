@@ -117,7 +117,6 @@ export default class HomeView extends View{
   };
 
   hourCard(hour) {
-    console.log(hour);
     return `
     <p class="d-flex flex-column align-items-center">
       <span>${this.timeFormat(hour.dt * 1000)}</span>
