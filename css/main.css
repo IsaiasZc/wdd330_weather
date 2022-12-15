@@ -3,6 +3,10 @@
   --main-blue: #24609b;
 }
 
+.bi::before {
+  font-weight: 800 !important;
+}
+
 body {
   font-family: 'Red Hat Display', sans-serif;
 }

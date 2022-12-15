@@ -38,6 +38,10 @@ export default class Effects {
     element.classList.add(newClass)
   }
 
+  /**
+   * Change the active button
+   * @param {positino} key the position of the button
+   */
   changeActiveBtn(key) {
     // old btns
     this.replaceClass(this.getBtn(this.btns.before),'active','link-dark');

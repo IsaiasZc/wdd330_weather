@@ -62,6 +62,8 @@ export default class Main {
 
   async buildAllWeather(type="current", place) {
     // de-activate the buttons and set load
+
+    effects.changeActiveBtn('home-btn');
     utl.setLoadingView();
     utl.changeActiveBtnState();
     let coords;
@@ -105,7 +107,6 @@ export default class Main {
   setCityBtns() {
 
     const cities = api.getCities();
-    console.log(utl.$(".btn-city"));
 
     utl.$(".btn-city").forEach( (btn, idx) => {
       const city = Object.values(cities[idx]).join(",");
