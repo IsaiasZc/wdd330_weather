@@ -7,7 +7,7 @@ export default class ForeCastView extends View {
 
   prepareForecast(forecast) {
     const foreView = this.newElem("section");
-    foreView.className = 'foreView container-sm'
+    foreView.className = 'foreView container-sm d-flex flex-column gap-5'
     foreView.appendChild(this.hourCards(forecast.hourly))
     foreView.appendChild(this.dailyCards(forecast.daily))
     return foreView
@@ -31,7 +31,7 @@ export default class ForeCastView extends View {
 
   hourCard(hourData) {
     const card = this.newElem("div");
-    card.className = 'hourCard d-flex flex-column border rounded p-1 align-items-center';
+    card.className = 'hourCard border-0 p-4 d-flex flex-column border rounded p-1 align-items-center';
     card.style.minWidth = '140px';
     card.innerHTML = `
     <h4>${this.timeFormat(hourData.dt * 1000)}</h4>
@@ -43,19 +43,24 @@ export default class ForeCastView extends View {
   }
 
   dailyCards(days) {
+    const cntAll = this.newElem("div");
+    cntAll.innerHTML = "<h2>Coming days</h2>"
     const container = this.newElem('section');
     container.className = 'fore-days-cnt d-grid'
+
     // console.log(days)
     days.forEach( day => {
       container.appendChild(this.dayCard(day))
     })
 
-    return container
+    cntAll.appendChild(container)
+
+    return cntAll
   }
 
   dayCard(dayData) {
     const card = this.newElem("div");
-    card.className = 'd-flex justify-content-between align-items-center';
+    card.className = 'fore_day_card p-3 rounded-4 w-100 d-flex justify-content-between align-items-center';
     const date = new Date(dayData.dt * 1000);
 
     card.innerHTML = `

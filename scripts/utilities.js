@@ -69,8 +69,8 @@ export default class Utilities {
    * 
    * @param {object} data information for the main card
    */
-  showHome(data, details=[]) {
-    const view = this.home.prepareHome(data, details);
+  showHome(data, details=[],hours) {
+    const view = this.home.prepareHome(data, details, hours);
     this.showMainView(view)
   };
 

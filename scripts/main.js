@@ -76,7 +76,7 @@ export default class Main {
 
     try {
       const {data, details, forecast} = await (type !== "current" ? api.reqByCords(place, "place") : api.reqByCords(coords));
-      utl.showHome(data, details);
+      utl.showHome(data, details, forecast.hourly);
       
       // Prepare the home with the given information, we will get the rest of the info later
   
@@ -94,9 +94,9 @@ export default class Main {
         }
       )
     } catch (error) {
-      alert("The city name is invalid");
-      utl.showHome(this.weather.data, this.weather.details);
       console.error(error);
+      alert("The city name is invalid");
+      utl.showHome(this.weather.data, this.weather.details, this.weather.forecast.hourly);
     }
 
 
@@ -128,7 +128,6 @@ export default class Main {
   loginEvent() {
     utl.form.addEventListener("submit", (e) => {
       e.preventDefault();
-      console.log("hola");
 
       const {userName, password} = utl.getFormValues();
 
@@ -154,7 +153,7 @@ export default class Main {
   };
 
   setupEventViews() {
-    this.setEventView('.home-btn', () => utl.showHome(this.weather.data, this.weather.details))
+    this.setEventView('.home-btn', () => utl.showHome(this.weather.data, this.weather.details, this.weather.forecast.hourly))
     this.setEventView('.forecast-btn', () => utl.showForecast(this.weather.forecast))
     this.setEventView('.cities-btn', () => utl.showCities(this.weather.cities, () => this.setCityBtns()))
     this.setEventView('.location-btn', () => utl.showLocation(this.weather.data,this.weather.country))
@@ -169,7 +168,6 @@ export default class Main {
   buildWeather(wth) {
     for (const key in wth) {
       if (this.weather[key]) {
-        console.log('se pudo');
         this.weather[key] = wth[key];
         
       }

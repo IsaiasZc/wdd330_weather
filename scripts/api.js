@@ -132,10 +132,10 @@ function buildCountryURL(code) {
  */
 function buildDetails(data) {
 
-  const wind = buildDetail("Wind", "Today wind speed", data.speed);
-  const pressure = buildDetail("Pressure", "Today Pressure", data.pressure);
-  const uv = buildDetail("UV Index", "Today UV Index", data.uv);
-  const humidity = buildDetail("Humidity", "Today Humidity", data.humidity);
+  const wind = buildDetail("Wind", "Today wind speed", `${data.speed} km/h`,"wind_icon.png");
+  const pressure = buildDetail("Pressure", "Today Pressure",`${ data.pressure} hpa`, "pressure_icon.png");
+  const uv = buildDetail("UV Index", "Today UV Index", `${data.uv}%`,"uv_icon.png");
+  const humidity = buildDetail("Humidity", "Today Humidity", data.humidity,"humidity_icon.png");
   
   return [
     wind,

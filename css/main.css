@@ -17,6 +17,10 @@ button:disabled {
 
 /* COLOR CLASSES */
 
+.bg_almost_white {
+  background-color: #9bd5ff;
+}
+
 .text-indigo {
   color: var(--bs-indigo);
 }
@@ -41,24 +45,16 @@ button:disabled {
 
 .fore-days-cnt {
   display: grid;
-  grid-template-columns: repeat(auto-fit,minmax(28rem, 1fr));
+  grid-template-columns: repeat(auto-fit,minmax(19rem, 1fr));
   justify-content: space-between;
   gap: 1rem 3rem;
   /* justify-items: center; */
   /* color: red; */
 }
-/* 
-.b-500 {
-  font-weight: 500;
-}
 
-.b-600 {
-  font-weight: 600;
+.card_det {
+  background-color: #ecf3f8;
 }
-
-.b-700 {
-  font-weight: 700;
-} */
 
 .hide {
   display: none !important;
@@ -89,7 +85,30 @@ button:disabled {
   max-height: 100%;
 }
 
+.details {
+  display: grid;
+  gap: 1rem;
+}
+
+.hourCard {
+  background-color: #9bd5ff;
+}
+
+.fore_day_card {
+  background-color: #add8e6;
+}
+
+@media screen and (min-width: 50rem) {
+
+  /* .details {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  } */
+}
 @media screen and (min-width: 62rem) {
+  .fore-days-cnt {
+  grid-template-columns: repeat(auto-fit,minmax(28rem, 1fr));
+  }
 
 }
 
@@ -98,5 +117,10 @@ button:disabled {
 @media screen and (min-width: 75rem) {
   .currentCard {
     flex-direction: row;
+  }
+
+  .details {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
   }
 }

@@ -8,7 +8,6 @@ export default class LocationView extends View {
   prepareCountry(wth, contry) {
     const countryView = this.newElem("section");
     countryView.className = 'country-view-section d-flex flex-column gap-3';
-    console.log(wth)
 
     countryView.appendChild( this.createCurrentCard(wth) )
 

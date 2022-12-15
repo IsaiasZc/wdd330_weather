@@ -10,12 +10,12 @@ export default class HomeView extends View{
    * @param {data} data prepare the home view
    * @returns the home view
    */
-   prepareHome(data, details=[]) {
+   prepareHome(data, details=[], hours) {
 
-    const mainCard = this.createCurrentCard(data);
+    const mainCard = this.createCurrentCard(data, hours);
     const detailsC = this.createMdetailCards(details);
     const homeView = this.newElem("section");
-    homeView.className = "home-view container-sm";
+    homeView.className = "home-view container-sm d-flex gap-5 flex-column";
 
     homeView.appendChild(mainCard);
     homeView.appendChild(detailsC);
@@ -28,7 +28,7 @@ export default class HomeView extends View{
    * @param {object} wth object with all the information
    * @returns node
    */
-  createCurrentCard(wth) {
+  createCurrentCard(wth, hours) {
     const card = this.newElem("div");
     card.className = "currentCard p-4 c-mainBlue d-flex";
     card.innerHTML = `
@@ -64,9 +64,9 @@ export default class HomeView extends View{
         </div>
       </section>
 
-      <section class="card_tmp_detailed py-2 rounded-3 w-100">
-        <h5 class="ps-3">temperature</h5>
-        ${testInfo()}
+      <section class="card_tmp_detailed py-2 rounded-3 w-100 d-flex flex-column justify-content-around">
+        <h5 class="h3 ps-3">Temperature</h5>
+        ${this.hoursCard(hours)}
 
       </section>
     `
@@ -75,7 +75,7 @@ export default class HomeView extends View{
 
   createMdetailCards(arr) {
     const details = this.newElem("div");
-    details.className = "details";
+    details.className = "details pb-4";
 
     arr.forEach( data => details.appendChild(this._createMDetailCard(data)))
     
@@ -84,24 +84,54 @@ export default class HomeView extends View{
 
   _createMDetailCard(obj) {
     const card = this.newElem("div");
+    card.className = "card_det rounded d-flex p-3";
     const {title, descrip, value, imgPath} = obj;
 
     card.innerHTML = `
-    <div class="data">
+    <div class="ps-3 data w-50 d-flex flex-column justify-content-evenly">
       <h2>${title}</h2>
-      <span>${descrip}</span>
+      <span class="text-black-50">${descrip}</span>
       <span>${value}</span>
     </div>
-    <div class="image">
-    <img src="${imgPath}" alt="${title}">
+    <div class="image w-50 d-flex justify-content-center align-items-center">
+      <img class="w-50" src="../../icons/${imgPath}" alt="${title}">
     </div>
     `
 
     return card
   }
+
+  hoursCard(hours) {
+    let hoursHTML = "";
+
+    for(let i = 1; i  < 4 ; i++) {
+      hoursHTML += this.hourCard(hours[i]);
+    }
+
+    return  `
+    <div class="div d-flex justify-content-around text-center">
+      ${hoursHTML}
+    </div>
+    `
+  
+  };
+
+  hourCard(hour) {
+    console.log(hour);
+    return `
+    <p class="d-flex flex-column align-items-center">
+      <span>${this.timeFormat(hour.dt * 1000)}</span>
+      <img src="${this.getIconURL(hour.weather[0].icon)}" alt="${hour.weather[0].description}" />
+      <span>${hour.temp}°</span>
+    </p>
+    `
+  }
 }
 
-function testInfo() {
+/* function hoursCard(hours) {
+
+  const cnt = 
+
   return  `
   <div class="line" style="height: 100px; width: 100%;">
 
@@ -125,4 +155,5 @@ function testInfo() {
     </p>
   </div>
   `
-}
+
+} */
