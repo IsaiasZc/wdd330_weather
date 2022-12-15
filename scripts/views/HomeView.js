@@ -94,7 +94,7 @@ export default class HomeView extends View{
       <span>${value}</span>
     </div>
     <div class="image w-50 d-flex justify-content-center align-items-center">
-      <img class="w-50" src="../../icons/${imgPath}" alt="${title}">
+      <img class="w-50" src="./icons/${imgPath}" alt="${title}">
     </div>
     `
 
